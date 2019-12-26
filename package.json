@@ -1,0 +1,86 @@
+{
+  "name": "gus-react-calendar",
+  "version": "1.0.0",
+  "description": "React component to handle calendar vue displaying several resources",
+  "main": "./dist/index.js",
+  "author": "Guillaume Gustin <github@guillaumegustin>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "cleanup": "./cleanup && yarn install",
+    "test": "jest",
+    "test:generate-output": "jest --json --outputFile=jest-test-results.json || true",
+    "build": "webpack --mode=production",
+    "prestorybook": "npm run test:generate-output",
+    "storybook": "start-storybook -p 9001",
+    "build-storybook": "build-storybook",
+    "lint": "eslint --ext .js,.jsx ./src",
+    "lint:fix": "eslint --ext .js,.jsx ./src --fix"
+  },
+  "keywords": [
+    "react",
+    "shared",
+    "components"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-console": "^1.2.1",
+    "@storybook/addon-jest": "^5.2.8",
+    "@storybook/addon-knobs": "^5.2.8",
+    "@storybook/react": "^5.2.8",
+    "@svgr/webpack": "^5.0.0",
+    "@testing-library/react": "^9.4.0",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-named-asset-import": "^0.3.5",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^3.4.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.17.0",
+    "history": "^4.10.1",
+    "jest": "^24.9.0",
+    "node-sass": "^4.13.0",
+    "prettier": "^1.19.1",
+    "react-test-renderer": "^16.12.0",
+    "sass-loader": "^8.0.0",
+    "sinon": "^8.0.1",
+    "style-loader": "^1.1.2",
+    "terser-webpack-plugin": "^2.3.1",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "babel-eslint": "^10.0.3",
+    "classnames": "^2.2.6",
+    "moment": "^2.24.0",
+    "moment-range": "^4.0.2"
+  },
+  "resolutions": {
+    "eslint": "6.x",
+    "react": "^16.8.6",
+    "prop-types": "^15.7.2",
+    "react-router-dom": "4.2.2",
+    "eslint-config-prettier": "6.x",
+    "eslint-plugin-prettier": "3.x",
+    "eslint-plugin-react": "7.x",
+    "prettier": "1.18.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
