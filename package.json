@@ -9,6 +9,7 @@
   "scripts": {
     "cleanup": "./cleanup && yarn install",
     "test": "jest",
+    "test:watch": "jest --watch",
     "test:generate-output": "jest --json --outputFile=jest-test-results.json || true",
     "build": "webpack --mode=production",
     "prestorybook": "npm run test:generate-output",
