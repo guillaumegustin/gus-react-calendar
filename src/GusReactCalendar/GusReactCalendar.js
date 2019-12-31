@@ -11,10 +11,11 @@ import './styles.scss';
 const GusReactCalendar = ({ year, month, data }) => {
   const days = getDaysForMonth(year, month);
   const seriesByDay = dataByDay(data);
+  console.log('gustest serieByDate', seriesByDay);
   return (
     <div className="month-container">
       <HoursHeader />
-      {days.map(day => {
+      {days.reverse().map(day => {
         const dayFormatted = day.format('YYYYMMDD');
         const dayData = seriesByDay[dayFormatted];
         return (

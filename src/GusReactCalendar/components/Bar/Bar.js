@@ -10,7 +10,9 @@ const Bar = ({ width, color, left, right }) => (
     right,
     width, 
     backgroundColor: color, 
-    height: '100%', 
+    height: '100%',
+    zIndex: 1000,
+    padding: '0 -3px',
   }} />
 );
 

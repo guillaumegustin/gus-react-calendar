@@ -8,11 +8,11 @@ import './styles.scss';
 const HoursHeader = () => {
   return (
     <div className="header-row">
-      <CalendarCell size={3} withBorder={false} />
+      <CalendarCell size={2} withBorder={false} />
       {getHoursInDay().map((h, i) => {
         return (
           <CalendarCell key={i} withBorder={false}>
-            {i % 2 === 1 && (
+            {i % 2 === 0 && i > 0 && (
               <div>
                 <div className="header-hour-label">{h.hour()}</div>
               </div>

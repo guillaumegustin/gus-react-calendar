@@ -11,8 +11,8 @@ const Day = ({ day, data }) => {
   const nbHours = hoursInDay.length;
   return (
     <div className="day-row">
-      <CalendarCell withBorder={false} size={3}>
-        <div className="cell-label">{day.format('DD.MM')}</div>
+      <CalendarCell withBorder={false} size={2}>
+        <div className="cell-label">{day.format('DD')}</div>
       </CalendarCell>
       {hoursInDay.map((h, i) => {
         const isLast = i === nbHours - 1;

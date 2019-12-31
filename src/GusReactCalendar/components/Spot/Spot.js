@@ -9,7 +9,7 @@ const Spot = ({ color, left, right, size, top }) => (
     backgroundColor: color,
     borderRadius: '50%',
     top,
-    zIndex: '1000',
+    zIndex: 2000,
     left,
     right,
   }} />
@@ -27,8 +27,8 @@ Spot.defaultProps = {
   color: 'red',
   left: 'auto',
   right: 'auto',
-  size: '8px',
-  top: 'calc(50% - 4px)',
+  size: '4px',
+  top: 'calc(50% - 2px)',
 };
 
 export default Spot;
