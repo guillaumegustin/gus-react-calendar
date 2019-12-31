@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import Day from './components/Day';
 
 import { getDaysForMonth } from '../utils/DateUtils';
-import { data } from '../utils/___test___/mock'
 import { dataByDay } from '../utils/formatter';
 import HoursHeader from './components/HoursHeader';
 import './styles.scss';
 
-const GusReactCalendar = ({ year, month }) => {
+const GusReactCalendar = ({ year, month, data }) => {
   const days = getDaysForMonth(year, month);
   const seriesByDay = dataByDay(data);
   return (
@@ -29,6 +28,16 @@ const GusReactCalendar = ({ year, month }) => {
 GusReactCalendar.propTypes = {
   year: PropTypes.number,
   month: PropTypes.number,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    type: PropTypes.string,
+    color: PropTypes.string,
+    serie: PropTypes.arrayOf(PropTypes.shape({
+      start: PropTypes.string,
+      end: PropTypes.string,
+      time: PropTypes.string,
+    }))
+  }))
 };
 
 export default GusReactCalendar;
