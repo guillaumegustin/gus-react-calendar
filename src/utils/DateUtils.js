@@ -13,7 +13,7 @@ export const getDaysForMonth = (year, month) => {
   return days;
 }
 
-export const getHoursInDay = (dayMoment) => {
+export const getHoursInDay = (dayMoment = moment()) => {
   const start = moment(dayMoment).startOf('date');
   const end = moment(dayMoment).endOf('date');
   const hoursRange = moment.range(start, end);

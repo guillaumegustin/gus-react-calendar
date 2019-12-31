@@ -1,6 +1,7 @@
+@import './theme.scss';
 .month-container {
   width: 100%;
-  .day-row {
+  .day-row, .header-row {
     width: 100%;
     display: flex;
     flex-direction: row;

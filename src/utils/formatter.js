@@ -1,16 +1,21 @@
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 const moment = extendMoment(Moment);
+export const momentFormat = 'YYYY-MM-DD HH:mm';
 
 function minutesToPercent(minutes) {
   return Math.round(minutes * 100 / 60);
+}
+
+function makeMoment(time) {
+  return moment.isMoment(time) ? time : moment(time);
 }
 
 export const serieByDate = ({ serie, title, type, color }) => {
   return serie.reduce((acc, current) => {
     const date = current.date || current.start || current.time;
     
-    const formatedDate = moment(date).format('YYYYMMDD');
+    const formatedDate = moment(date, momentFormat).format('YYYYMMDD');
     if (!acc[formatedDate]) acc[formatedDate] = [];
     acc[formatedDate].push({
       ...current,
@@ -35,10 +40,12 @@ export const dataByDay = (data) => {
   }, {});
 };
 
-export const filterDataWithinHourRange = (data, hourMin, hourMax) => {
-  return data.filter(d => {
-    const date = moment(d.start || d.time || d.date);
-    const endDate = d.end ? moment(d.end) : null;
+export const filterDataSerieWithinHourRange = (serie, hMin, hMax) => {
+  const hourMin = makeMoment(hMin);
+  const hourMax = makeMoment(hMax);
+  return serie.filter(d => {
+    const date = moment(d.start || d.time || d.date, momentFormat);
+    const endDate = d.end ? moment(d.end, momentFormat) : null;
     // console.log(`gustest - hourMin:${hourMin.hour()}, hourMax: ${hourMax ? hourMax.hour(): 'null'}`)
     // console.log(`gustest - date:${date.hour()}, endDate: ${endDate ? endDate.hour(): 'null'}`)
     if(endDate) {  //range
@@ -49,25 +56,29 @@ export const filterDataWithinHourRange = (data, hourMin, hourMax) => {
   })
 }
 
-export const dataSpotWidthPercent = (time, hourMin) => {
-  const minutesDiff = moment(time).diff(hourMin, 'minutes');
-  return minutesToPercent(minutesDiff);
+export const dataSpotLeftPercentInHour = (time, hourMin) => {
+  const minutesDiff = makeMoment(time).diff(makeMoment(hourMin), 'minutes');
+  const result = minutesToPercent(minutesDiff);
+  return result > 0 ? (result <= 100 ? result : 100) : 0;
 }
 
-export const dataRangePosition = (start, end, hourMin, hourMax) => {
+export const positionPercentInHour = (start, end, hourMin, hourMax) => {
 
   if (!hourMax) return {
     left: 0,
     width: 0,
   }
 
-  const startMoment = moment(start);
-  const endMoment = moment(end);
+  const startMoment = moment.isMoment(start) ? start : moment(start);
+  const endMoment = moment.isMoment(end) ? end : moment(end);
 
-  const left = startMoment.isSameOrBefore(hourMin) ? 0 : minutesToPercent(startMoment.diff(hourMin, 'minutes'));
-  const width = endMoment.isSameOrAfter(hourMax) ? (100 - left) : (100 - minutesToPercent(hourMax.diff(endMoment, 'minutes')) - left);
-  // console.log(`gustest start=${start}, end=${end}, hourMin=${hourMin} => LEFT=${left}`)
-  // console.log(`gustest start=${start}, end=${end}, hourMin=${hourMin} => WIDTH=${width}`)
+  const hourMinMoment = makeMoment(hourMin);
+  const hourMaxMoment = makeMoment(hourMax);
+
+  const left = startMoment.isSameOrBefore(hourMinMoment) ? 0 : minutesToPercent(startMoment.diff(hourMinMoment, 'minutes'));
+  const width = endMoment.isSameOrAfter(hourMaxMoment) ? (100 - left) : (100 - minutesToPercent(hourMaxMoment.diff(endMoment, 'minutes')) - left);
+  // console.log(`gustest start=${startMoment}, end=${end}, hourMin=${hourMin} => LEFT=${left}`)
+  // console.log(`gustest start=${startMoment}, end=${end}, hourMax=${hourMax} => WIDTH=${width}`)
   return {
     left,
     width,
