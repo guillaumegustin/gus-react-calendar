@@ -1,11 +1,10 @@
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
+
+import { SECONDS_IN_DAY } from '../GusReactCalendar/constants';
+
 const moment = extendMoment(Moment);
 export const momentFormat = 'YYYY-MM-DD HH:mm';
-
-function minutesToPercent(minutes) {
-  return Math.round(minutes * 100 / 60);
-}
 
 function makeMoment(time) {
   return moment.isMoment(time) ? time : moment(time);
@@ -14,6 +13,10 @@ function makeMoment(time) {
 function addToMapByDate(map, date, value) {
   if(!map[date]) map[date] = [];
   map[date].push(value);
+}
+
+export const secondsToPercentDay = (seconds) => {
+  return Math.round(seconds * 100 / SECONDS_IN_DAY);
 }
 
 export const serieByDate = ({ serie, title, type, color }) => {
@@ -56,49 +59,32 @@ export const dataByDay = (data) => {
   }, {});
 };
 
-export const filterDataSerieWithinHourRange = (serie, hMin, hMax) => {
-  const hourMin = makeMoment(hMin);
-  const hourMax = makeMoment(hMax);
-  return serie.filter(d => {
-    const date = moment(d.start || d.time || d.date, momentFormat);
-    const endDate = d.end ? moment(d.end, momentFormat) : null;
-    // console.log(`gustest - hourMin:${hourMin.hour()}, hourMax: ${hourMax ? hourMax.hour(): 'null'}`)
-    // console.log(`gustest - date:${date.hour()}, endDate: ${endDate ? endDate.hour(): 'null'}`)
-    if(endDate) {  //range
-     return  (date.isSameOrBefore(hourMin) && endDate.isAfter(hourMin))
-      || (date.isSameOrAfter(hourMin) && (hourMax ? date.isBefore(hourMax) : true) )
-    }
-    return (date.isSameOrAfter(hourMin) && (hourMax ? date.isBefore(hourMax) : true));
-  })
-}
+export const calculateBarPositionInDay = ({ start, end, day }) => {
+  const startMoment = makeMoment(start);
+  const endMoment = makeMoment(end);
+  const dayMomentStart = makeMoment(day).clone().startOf('date');
+  const dayMomentEnd = makeMoment(day).clone().endOf('date');
+  
+  // console.log('day', day);
+  // console.log('dayMomentStart', dayMomentStart);
+  // console.log('dayMomentEnd', dayMomentEnd);
+  
+  const left = startMoment.isSameOrBefore(dayMomentStart)
+    ? 0
+    : secondsToPercentDay(startMoment.diff(dayMomentStart, 'seconds'));
 
-export const dataSpotLeftPercentInHour = (time, hourMin) => {
-  const minutesDiff = makeMoment(time).diff(makeMoment(hourMin), 'minutes');
-  const result = minutesToPercent(minutesDiff);
-  return result > 0 ? (result <= 100 ? result : 100) : 0;
-}
-
-export const positionPercentInHour = (start, end, hourMin, hourMax) => {
-
-  // if (!hourMax) return {
-  //   left: 0,
-  //   width: 0,
-  // }
-
-  const startMoment = moment.isMoment(start) ? start : moment(start);
-  const endMoment = moment.isMoment(end) ? end : moment(end);
-
-  const hourMinMoment = makeMoment(hourMin);
-  const hourMaxMoment = hourMax !== null ? makeMoment(hourMax) : null;
-
-  const left = startMoment.isSameOrBefore(hourMinMoment) ? 0 : minutesToPercent(startMoment.diff(hourMinMoment, 'minutes'));
-  const width = hourMaxMoment === null 
+  const width = endMoment.isSameOrAfter(dayMomentEnd)
     ? (100 - left)
-    : (endMoment.isSameOrAfter(hourMaxMoment) ? (100 - left) : (100 - minutesToPercent(hourMaxMoment.diff(endMoment, 'minutes')) - left));
-  // console.log(`gustest start=${startMoment}, end=${end}, hourMin=${hourMin} => LEFT=${left}`)
-  // console.log(`gustest start=${startMoment}, end=${end}, hourMax=${hourMax} => WIDTH=${width}`)
+    : (100 - left - secondsToPercentDay(dayMomentEnd.diff(endMoment, 'seconds')))
+
   return {
     left,
     width,
   }
+}
+
+export const calculateSpotPositionInDay = ({ time, day }) => {
+  const timeMoment = makeMoment(time);
+  const dayMomentStart = makeMoment(day).clone().startOf('date');
+  return secondsToPercentDay(timeMoment.diff(dayMomentStart, 'seconds'));
 }

@@ -1,64 +1,89 @@
 import moment from 'moment';
+
 import {
+  secondsToPercentDay,
   momentFormat,
   serieByDate,
   dataByDay,
-  positionPercentInHour,
-  dataSpotLeftPercentInHour,
-  filterDataSerieWithinHourRange,
+  calculateBarPositionInDay,
+  calculateSpotPositionInDay,
 } from '../formatter';
 import { data } from './mock';
+
+test('Foramtter secondsToPercentDay', () => {
+  expect(secondsToPercentDay(6 * 60 * 60)).toStrictEqual(25);
+  expect(secondsToPercentDay(12 * 60 * 60)).toStrictEqual(50);
+  expect(secondsToPercentDay(18 * 60 * 60)).toStrictEqual(75);
+})
 
 test('Formatter serieByDate', () => {
   const result = serieByDate(data[0]);
   expect(result).toBeDefined();
 })
 
-test('Formatter filterDataSerieWithinHourRange', () => {
-  const start = moment('2019-12-01 03:00');
-  const end = moment('2019-12-01 10:00');
-  const result = filterDataSerieWithinHourRange(data[0].serie, start, end);
-  result.forEach(r => {
-    expect(moment(r.start || r.date || r.time, momentFormat).isAfter(start)).toBeTruthy();
-  })
-});
 
 test('Formatter dataByDay', () => {
   const result = dataByDay(data);
   expect(result['20191201']).toBeDefined();
 })
 
-test('Formatter positionPercentInHour 1', () => {
-  const start = moment('2019-03-10 10:30');
-  const end = moment('2019-03-10 10:45');
-  const hourMin =  moment('2019-03-10 10:00');
-  const hourMax =  moment('2019-03-10 11:00');
-  const result = positionPercentInHour(start, end, hourMin, hourMax);
-  expect(result).toStrictEqual({ left: 50, width: 25 });
+test('Formatter calculateBarPositionInDay 1', () => {
+  const start = moment('2019-03-09 10:00', momentFormat);
+  const end = moment('2019-03-10 12:00', momentFormat);
+  const day = moment('2019-03-10');
+  const result = calculateBarPositionInDay({start, end, day});
+  expect(result).toStrictEqual({ left: 0, width: 50 });
 })
 
-test('Formatter positionPercentInHour 2', () => {
-  const start = moment('2019-03-10 10:00');
-  const end = moment('2019-03-10 11:10');
-  const hourMin =  moment('2019-03-10 10:00');
-  const hourMax =  moment('2019-03-10 11:00');
-  const result = positionPercentInHour(start, end, hourMin, hourMax);
+test('Formatter calculateBarPositionInDay 2', () => {
+  const start = moment('2019-03-09 10:00', momentFormat);
+  const end = moment('2019-03-10 15:30', momentFormat);
+  const day = moment('2019-03-10');
+  const result = calculateBarPositionInDay({start, end, day});
+  expect(result).toStrictEqual({ left: 0, width: 65 });
+})
+
+test('Formatter calculateBarPositionInDay 3', () => {
+  const start = moment('2019-03-09 10:00', momentFormat);
+  const end = moment('2019-03-11 15:30', momentFormat);
+  const day = moment('2019-03-10');
+  const result = calculateBarPositionInDay({start, end, day});
   expect(result).toStrictEqual({ left: 0, width: 100 });
 })
 
-test('Formatter positionPercentInHour 3', () => {
-  const start = moment('2019-03-09 10:00');
-  const end = moment('2019-03-10 12:10');
-  const hourMin =  moment('2019-03-10 10:00');
-  const hourMax =  moment('2019-03-10 11:00');
-  const result = positionPercentInHour(start, end, hourMin, hourMax);
-  expect(result).toStrictEqual({ left: 0, width: 100 });
+test('Formatter calculateBarPositionInDay 4', () => {
+  const start = moment('2019-03-10 10:00', momentFormat);
+  const end = moment('2019-03-10 15:30', momentFormat);
+  const day = moment('2019-03-10');
+  const result = calculateBarPositionInDay({start, end, day});
+  expect(result).toStrictEqual({ left: 42, width: 23 });
 })
 
-test('Formatter dataSpotLeftPercentInHour', () => {
-  expect(dataSpotLeftPercentInHour('2019-03-09 10:00', '2019-03-09 10:00')).toStrictEqual(0)
-  expect(dataSpotLeftPercentInHour('2019-03-09 10:30', '2019-03-09 10:00')).toStrictEqual(50)
-  expect(dataSpotLeftPercentInHour('2019-03-09 10:15', '2019-03-09 10:00')).toStrictEqual(25)
-  expect(dataSpotLeftPercentInHour('2019-03-09 09:15', '2019-03-09 10:00')).toStrictEqual(0)
-  expect(dataSpotLeftPercentInHour('2019-03-09 11:15', '2019-03-09 10:00')).toStrictEqual(100)
+test('Formatter calculateBarPositionInDay 5', () => {
+  const start = moment('2019-03-10 10:00', momentFormat);
+  const end = moment('2019-03-11 15:30', momentFormat);
+  const day = moment('2019-03-10');
+  const result = calculateBarPositionInDay({start, end, day});
+  expect(result).toStrictEqual({ left: 42, width: 58 });
 })
+
+test('Formatter calculateSpotPositionInDay 1', () => {
+  const time = moment('2019-03-10 10:00', momentFormat);
+  const day = moment('2019-03-10');
+  const result = calculateSpotPositionInDay({time, day});
+  expect(result).toStrictEqual(42);
+})
+
+test('Formatter calculateSpotPositionInDay 2', () => {
+  const time = moment('2019-03-10 00:00', momentFormat);
+  const day = moment('2019-03-10');
+  const result = calculateSpotPositionInDay({time, day});
+  expect(result).toStrictEqual(0);
+});
+
+test('Formatter calculateSpotPositionInDay 2', () => {
+  const time = moment('2019-03-10 23:59:59', momentFormat);
+  const day = moment('2019-03-10');
+  const result = calculateSpotPositionInDay({time, day});
+  expect(result).toStrictEqual(100);
+});

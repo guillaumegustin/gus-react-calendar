@@ -9,7 +9,7 @@ import { dataSpotLeftPercentInHour, positionPercentInHour } from '../../../utils
 const HourCell = ({ data, hour, nextHour }) => {
   return (
     <CalendarCell>
-      {data.map(d => {
+      {/* {data.map(d => {
         if (d.type === "bar") {
           const { width, left } = positionPercentInHour(d.start, d.end, hour, nextHour)
           return <Bar width={`${width}%`} left={`${left}%`} color={d.color} />
@@ -18,7 +18,7 @@ const HourCell = ({ data, hour, nextHour }) => {
           const percent = dataSpotLeftPercentInHour(d.time, hour);
           return <Spot color={d.color} left={`${percent}%`} />
         }
-      })}
+      })} */}
     </CalendarCell>
   );
 };

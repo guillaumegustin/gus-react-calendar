@@ -27,8 +27,8 @@ Spot.defaultProps = {
   color: 'red',
   left: 'auto',
   right: 'auto',
-  size: '4px',
-  top: 'calc(50% - 2px)',
+  size: '8px',
+  top: 'calc(50% - 4px)',
 };
 
 export default Spot;

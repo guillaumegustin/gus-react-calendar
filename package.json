@@ -60,7 +60,8 @@
     "babel-eslint": "^10.0.3",
     "classnames": "^2.2.6",
     "moment": "^2.24.0",
-    "moment-range": "^4.0.2"
+    "moment-range": "^4.0.2",
+    "uniqid": "^5.2.0"
   },
   "resolutions": {
     "eslint": "6.x",

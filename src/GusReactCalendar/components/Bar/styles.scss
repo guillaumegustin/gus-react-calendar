@@ -1,0 +1,11 @@
+.calendar-bar {
+  height: calc(100% - 2px);
+  z-index: 1000;
+  padding: 0 -3px;
+  border-radius: 1px;
+  position: absolute;
+  display:inline-block;
+  top: 1px;
+  bottom: 1px;
+  overflow:hidden;
+}

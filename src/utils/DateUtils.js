@@ -18,6 +18,5 @@ export const getHoursInDay = (dayMoment = moment()) => {
   const end = moment(dayMoment).endOf('date');
   const hoursRange = moment.range(start, end);
   const hours = Array.from(hoursRange.by('hours'));
-  console.log('hours', hours);
   return hours;
 }
