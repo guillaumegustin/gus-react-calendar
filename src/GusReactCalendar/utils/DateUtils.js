@@ -1,7 +1,10 @@
-import * as Moment from 'moment';
-import { extendMoment } from 'moment-range';
+import { moment, isLocaleHandled } from './moment';
 
-const moment = extendMoment(Moment);
+export const getMonthLabel = (monthNumber, locale) => {
+  const d = moment().month((monthNumber - 1));
+  if (locale && isLocaleHandled(locale)) d.locale(locale);
+  return d.format('MMMM YYYY');
+};
 
 export const getDaysForMonth = (year, month) => {
   const startDate = moment(`${year}${month}01`);

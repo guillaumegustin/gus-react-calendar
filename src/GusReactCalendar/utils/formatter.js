@@ -1,14 +1,6 @@
-import Moment from 'moment';
-import { extendMoment } from 'moment-range';
-
-import { SECONDS_IN_DAY } from '../GusReactCalendar/constants';
-
-const moment = extendMoment(Moment);
+import { moment, makeMoment } from './moment';
+import { SECONDS_IN_DAY } from '../constants';
 export const momentFormat = 'YYYY-MM-DD HH:mm';
-
-function makeMoment(time) {
-  return moment.isMoment(time) ? time : moment(time);
-}
 
 function addToMapByDate(map, date, value) {
   if(!map[date]) map[date] = [];

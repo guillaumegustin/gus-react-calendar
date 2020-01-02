@@ -1,5 +1,9 @@
 $cell-height: 20px;
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .calendar-cell {
   height: $cell-height;
   position: relative;
