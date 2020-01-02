@@ -6,5 +6,3 @@ yarn-error.log
 
 # Test report for storybook
 jest-test-results.json
-
-dist/

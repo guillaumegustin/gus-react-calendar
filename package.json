@@ -1,7 +1,7 @@
 {
   "name": "gus-react-calendar",
-  "version": "1.0.0",
-  "description": "React component to handle calendar vue displaying several resources",
+  "version": "1.0.2-alpha",
+  "description": "Calendar react component displaying spots and ranges bars",
   "main": "./dist/index.js",
   "author": "Guillaume Gustin <github@guillaumegustin>",
   "license": "MIT",
