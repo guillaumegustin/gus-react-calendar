@@ -1,5 +1,5 @@
 # gus-react-calendar
-<span style="color:red;font-weight:bold">warning !! This component is still work in progress</span>
+### *WARNING: This component is still work in progress !! *
 
 A react component to display calendars with Spot and Range bars resources displayed on it.
 
