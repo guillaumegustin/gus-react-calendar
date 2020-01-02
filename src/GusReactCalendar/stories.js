@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withConsole } from '@storybook/addon-console';
 import { withKnobs, number, text } from '@storybook/addon-knobs';
 
-import { data } from '../utils/___test___/mock'
+import { data } from './utils/___test___/mock'
 
 import GusReactCalendar from './index';
 

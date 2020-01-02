@@ -6,8 +6,12 @@ export const getMonthLabel = (monthNumber, locale) => {
   return d.format('MMMM YYYY');
 };
 
+export const formatMonth = (month) => {
+  return `${month}`.length === 1 ? `0${month}` : `${month}`;
+}
+
 export const getDaysForMonth = (year, month) => {
-  const startDate = moment(`${year}${month}01`);
+  const startDate = moment(`${year}${formatMonth(month)}01`);
   const firstDay = moment(startDate).startOf('month')
   const endDay = moment(startDate).endOf('month')
 

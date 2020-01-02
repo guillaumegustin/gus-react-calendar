@@ -33,7 +33,7 @@ const GusReactCalendar = ({ year, month, data, locale }) => {
 GusReactCalendar.propTypes = {
   year: PropTypes.number,
   month: PropTypes.number,
-  locale: PropTypes.oneOf['fr', 'en'],
+  locale: PropTypes.oneOf(['fr', 'en']),
   data: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     type: PropTypes.string,

@@ -8,7 +8,7 @@ import {
   calculateBarPositionInDay,
   calculateSpotPositionInDay,
 } from '../formatter';
-import { data } from './mock';
+import { data, data2 } from './mock';
 
 test('Foramtter secondsToPercentDay', () => {
   expect(secondsToPercentDay(6 * 60 * 60)).toStrictEqual(25);
@@ -87,3 +87,8 @@ test('Formatter calculateSpotPositionInDay 2', () => {
   const result = calculateSpotPositionInDay({time, day});
   expect(result).toStrictEqual(100);
 });
+
+test('Formatter save', () => {
+  const result = serieByDate(data2[0]);
+  // console.log('RESULT', result);
+})
