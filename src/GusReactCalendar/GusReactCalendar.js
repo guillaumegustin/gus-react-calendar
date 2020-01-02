@@ -16,14 +16,14 @@ const GusReactCalendar = ({ year, month, data, locale }) => {
   return (
     <div className="month-container">
       <div className="month-header">
-        <div className="month-label calendar-title">{getMonthLabel(month)}</div>
+        <div className="month-label calendar-title">{getMonthLabel({month, year})}</div>
         <HoursHeader />
       </div>
       {days.reverse().map(day => {
         const dayFormatted = day.format('YYYYMMDD');
         const dayData = seriesByDay[dayFormatted];
         return (
-          <Day key={day.date()} day={day} data={dayData || []} />
+          <Day key={day.millisecond()} day={day} data={dayData || []} />
         );
       })}
     </div>

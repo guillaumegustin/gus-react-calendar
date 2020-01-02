@@ -1,7 +1,7 @@
 import { moment, isLocaleHandled } from './moment';
 
-export const getMonthLabel = (monthNumber, locale) => {
-  const d = moment().month((monthNumber - 1));
+export const getMonthLabel = ({month, year}, locale) => {
+  const d = moment().month((month - 1)).year(year);
   if (locale && isLocaleHandled(locale)) d.locale(locale);
   return d.format('MMMM YYYY');
 };

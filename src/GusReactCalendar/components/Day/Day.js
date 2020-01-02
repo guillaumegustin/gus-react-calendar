@@ -20,15 +20,15 @@ const Day = ({ day, data }) => {
       <CalendarCell withBorder={false} size={1}>
         <div className="cell-label">{day.format('DD')}</div>
       </CalendarCell>
-      {hoursInDay.map(h => <HourCell key={h.hour()} />)}
+      {hoursInDay.map(h => <HourCell key={h.format('YYYYMMDD-HH')} />)}
       {data.map(d => {
         if (d.type === "bar") {
           const { width, left } = calculateBarPositionInDay({ start: d.start, end: d.end, day });
-          return <Bar width={`${width}%`} left={adjustLeftPostion(left)} color={d.color} />
+          return <Bar key={`${d.title}-${day.millisecond()}`} width={`${width}%`} left={adjustLeftPostion(left)} color={d.color} />
         }
         if (d.type === "spot") {
           const left = calculateSpotPositionInDay({ time: d.time, day });
-          return <Spot color={d.color} left={adjustLeftPostion(left)} />
+          return <Spot key={`${d.title}-${day.millisecond()}`} color={d.color} left={adjustLeftPostion(left)} />
         }
       })}
     </div>

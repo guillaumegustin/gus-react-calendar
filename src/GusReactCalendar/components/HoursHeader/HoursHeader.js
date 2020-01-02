@@ -11,7 +11,7 @@ const HoursHeader = () => {
       <CalendarCell size={1} withBorder={false} />
       {getHoursInDay().map((h, i) => {
         return (
-          <CalendarCell key={i} withBorder={false}>
+          <CalendarCell key={h.millisecond()} withBorder={false}>
             {i % 2 === 0 && i > 0 && (
               <div>
                 <div className="header-hour-label">{h.hour()}</div>
