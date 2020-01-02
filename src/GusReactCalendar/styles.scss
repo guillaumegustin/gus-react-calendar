@@ -1,13 +1,26 @@
 @import './theme.scss';
 .month-container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  min-height: 100px;;
+  .month-header {
+    background-color: white;
+    z-index: 5000;
+    width: 100%;
+    position: sticky;
+    position: -webkit-sticky;
+    top:0;
+    padding: 5px 0;
+    .month-label {
+      font-size: 1.1em;
+      margin-bottom: 15px;
+    }
+  }
   .day-row, .header-row {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     position: relative;
+    overflow: hidden;
   }
 }

@@ -1,7 +1,9 @@
 $cell-height: 20px;
 
-.capitalize {
-  text-transform: capitalize;
+.calendar-title {
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: bold;
 }
 
 .calendar-cell {

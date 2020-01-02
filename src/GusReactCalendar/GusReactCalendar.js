@@ -16,7 +16,7 @@ const GusReactCalendar = ({ year, month, data, locale }) => {
   return (
     <div className="month-container">
       <div className="month-header">
-        <div className="capitalize">{getMonthLabel(month)}</div>
+        <div className="month-label calendar-title">{getMonthLabel(month)}</div>
         <HoursHeader />
       </div>
       {days.reverse().map(day => {
