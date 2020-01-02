@@ -5,8 +5,8 @@ import CalendarCell from '../CalendarCell';
 import HourCell from '../HourCell';
 import Bar from '../Bar';
 import Spot from '../Spot';
-import { getHoursInDay } from '../../../utils/DateUtils';
-import { calculateSpotPositionInDay, calculateBarPositionInDay } from '../../../utils/formatter';
+import { getHoursInDay } from '../../utils/DateUtils';
+import { calculateSpotPositionInDay, calculateBarPositionInDay } from '../../utils/formatter';
 import { DAY_LABEL_WIDTH_PERCENT, CELL_BORDER_WIDTH } from '../../constants';
 
 function adjustLeftPostion(leftPercent) {

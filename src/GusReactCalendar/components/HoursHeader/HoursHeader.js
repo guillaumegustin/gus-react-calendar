@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CalendarCell from '../CalendarCell';
-import { getHoursInDay } from '../../../utils/DateUtils';
+import { getHoursInDay } from '../../utils/DateUtils';
 
 import './styles.scss';
 
