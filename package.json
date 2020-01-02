@@ -1,6 +1,6 @@
 {
   "name": "gus-react-calendar",
-  "version": "1.0.2-alpha",
+  "version": "1.0.5-alpha",
   "description": "Calendar react component displaying spots and ranges bars",
   "main": "./dist/index.js",
   "author": "Guillaume Gustin <github@guillaumegustin>",
@@ -16,7 +16,8 @@
     "storybook": "start-storybook -p 9001",
     "build-storybook": "build-storybook",
     "lint": "eslint --ext .js,.jsx ./src",
-    "lint:fix": "eslint --ext .js,.jsx ./src --fix"
+    "lint:fix": "eslint --ext .js,.jsx ./src --fix",
+    "deploy": "yarn build && npm publish"
   },
   "keywords": [
     "react",
