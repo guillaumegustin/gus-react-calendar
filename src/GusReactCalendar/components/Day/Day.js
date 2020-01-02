@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 import CalendarCell from '../CalendarCell';
 import HourCell from '../HourCell';
@@ -20,15 +21,15 @@ const Day = ({ day, data }) => {
       <CalendarCell withBorder={false} size={1}>
         <div className="cell-label">{day.format('DD')}</div>
       </CalendarCell>
-      {hoursInDay.map(h => <HourCell key={h.format('YYYYMMDD-HH')} />)}
+      {hoursInDay.map(() => <HourCell key={uniqid()} />)}
       {data.map(d => {
         if (d.type === "bar") {
           const { width, left } = calculateBarPositionInDay({ start: d.start, end: d.end, day });
-          return <Bar key={`${d.title}-${day.millisecond()}`} width={`${width}%`} left={adjustLeftPostion(left)} color={d.color} />
+          return <Bar key={uniqid()} width={`${width}%`} left={adjustLeftPostion(left)} color={d.color} />
         }
         if (d.type === "spot") {
           const left = calculateSpotPositionInDay({ time: d.time, day });
-          return <Spot key={`${d.title}-${day.millisecond()}`} color={d.color} left={adjustLeftPostion(left)} />
+          return <Spot key={uniqid()} color={d.color} left={adjustLeftPostion(left)} />
         }
       })}
     </div>
@@ -40,7 +41,7 @@ Day.propTypes = {
     date: PropTypes.func,
     format: PropTypes.func,
   }),
-  data: PropTypes.object
+  data: PropTypes.array,
 }
 
 export default Day;

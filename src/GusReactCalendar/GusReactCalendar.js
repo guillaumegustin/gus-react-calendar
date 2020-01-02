@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 import Day from './components/Day';
 import HoursHeader from './components/HoursHeader';
@@ -23,7 +24,7 @@ const GusReactCalendar = ({ year, month, data, locale }) => {
         const dayFormatted = day.format('YYYYMMDD');
         const dayData = seriesByDay[dayFormatted];
         return (
-          <Day key={day.millisecond()} day={day} data={dayData || []} />
+          <Day key={uniqid()} day={day} data={dayData || []} />
         );
       })}
     </div>

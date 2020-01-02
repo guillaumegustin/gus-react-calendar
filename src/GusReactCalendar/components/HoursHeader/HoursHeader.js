@@ -1,4 +1,5 @@
 import React from 'react';
+import uniqid from 'uniqid';
 
 import CalendarCell from '../CalendarCell';
 import { getHoursInDay } from '../../utils/DateUtils';
@@ -11,7 +12,7 @@ const HoursHeader = () => {
       <CalendarCell size={1} withBorder={false} />
       {getHoursInDay().map((h, i) => {
         return (
-          <CalendarCell key={h.millisecond()} withBorder={false}>
+          <CalendarCell key={uniqid()} withBorder={false}>
             {i % 2 === 0 && i > 0 && (
               <div>
                 <div className="header-hour-label">{h.hour()}</div>
