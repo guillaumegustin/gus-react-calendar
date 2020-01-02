@@ -1,7 +1,7 @@
 export const data = [{
   title: 'Tétée',
   type: 'bar',
-  color: 'blue',
+  color: '#baf2e7',
   serie: [{
     start: "2019-12-01 4:30",
     end: "2019-12-01 5:40",
@@ -20,7 +20,7 @@ export const data = [{
 },{
   title: 'Sommeil',
   type: 'bar',
-  color: 'green',
+  color: '#7feed8',
   serie: [{
     start: "2019-12-01 19:30",
     end: "2019-12-02 07:00",
@@ -47,7 +47,7 @@ export const data = [{
 },{
   title: 'change',
   type: 'spot',
-  color: 'red',
+  color: '#FFA69E',
   serie: [{
     time: "2019-12-01 04:20",
   },
