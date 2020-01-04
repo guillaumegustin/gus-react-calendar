@@ -28,5 +28,17 @@ storiesOf('GusReactCalendar', module)
       >
       </GusReactCalendar>
     </div>
-  ));
+  ))
+  .add('with LimitMax', () => (
+    <div>
+      <GusReactCalendar
+        year={number('year', 2019)}  
+        month={number('month.1', 12)}
+        locale={text('locale', 'en')}
+        limitMax="2019-12-15"
+        data={data}
+      >
+      </GusReactCalendar>
+    </div>
+  ))
   

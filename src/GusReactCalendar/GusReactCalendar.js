@@ -10,9 +10,9 @@ import { getDaysForMonth, getMonthLabel } from './utils/DateUtils';
 import { dataByDay } from './utils/formatter';
 import './styles.scss';
 
-const GusReactCalendar = ({ year, month, data, locale }) => {
+const GusReactCalendar = ({ year, month, data, locale, limitMax }) => {
   setMomentLocale(locale);
-  const days = getDaysForMonth(year, month);
+  const days = getDaysForMonth(year, month, limitMax ? moment(limitMax) : null);
   const seriesByDay = dataByDay(data);
   return (
     <div className="month-container">
@@ -34,6 +34,7 @@ const GusReactCalendar = ({ year, month, data, locale }) => {
 GusReactCalendar.propTypes = {
   year: PropTypes.number,
   month: PropTypes.number,
+  limitMax: PropTypes.string,
   locale: PropTypes.oneOf(['fr', 'en']),
   data: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
@@ -52,6 +53,7 @@ GusReactCalendar.defaultProps = {
   month: moment().month(),
   locale: 'en',
   data: [],
+  limitMax: null,
 };
 
 export default GusReactCalendar;

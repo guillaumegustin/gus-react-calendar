@@ -10,14 +10,14 @@ export const formatMonth = (month) => {
   return `${month}`.length === 1 ? `0${month}` : `${month}`;
 }
 
-export const getDaysForMonth = (year, month) => {
+export const getDaysForMonth = (year, month, limitMaxMoment) => {
   const startDate = moment(`${year}${formatMonth(month)}01`);
   const firstDay = moment(startDate).startOf('month')
   const endDay = moment(startDate).endOf('month')
 
   const monthRange = moment.range(firstDay, endDay)
   const days =  Array.from(monthRange.by('days'));
-  return days;
+  return limitMaxMoment ? days.filter(d => d.isSameOrBefore(limitMaxMoment)) : days;
 }
 
 export const getHoursInDay = (dayMoment = moment()) => {
