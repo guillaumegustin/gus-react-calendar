@@ -1,6 +1,4 @@
 # gus-react-calendar
-### *WARNING: This component is still work in progress !! *
-
 A react component to display calendars with Spot and Range bars resources displayed on it.
 
 ![gus-react-calendar demo](https://raw.githubusercontent.com/guillaumegustin/gus-react-calendar/master/gus-react-calendar-demo.png)
