@@ -29,7 +29,6 @@ const Day = ({ day, data }) => {
         {data.map(d => {
           if (d.type === "bar") {
             const { width, left } = calculateBarPositionInDay({ start: d.start, end: d.end, day });
-            console.log({ width, left })
             return <Bar key={uniqid()} width={`${width}%`} left={adjustLeftPostion(left)} color={d.color} />
           }
           if (d.type === "spot") {
