@@ -32,7 +32,7 @@ test('Formatter calculateBarPositionInDay 1', () => {
   const end = moment('2019-03-10 12:00', momentFormat);
   const day = moment('2019-03-10');
   const result = calculateBarPositionInDay({start, end, day});
-  expect(result).toStrictEqual({ left: 0, width: 50 });
+  expect(result).toStrictEqual({ left: 0, width: 50.001157407407405 });
 })
 
 test('Formatter calculateBarPositionInDay 2', () => {
@@ -40,7 +40,7 @@ test('Formatter calculateBarPositionInDay 2', () => {
   const end = moment('2019-03-10 15:30', momentFormat);
   const day = moment('2019-03-10');
   const result = calculateBarPositionInDay({start, end, day});
-  expect(result).toStrictEqual({ left: 0, width: 65 });
+  expect(result).toStrictEqual({ left: 0, width: 64.58449074074073 });
 })
 
 test('Formatter calculateBarPositionInDay 3', () => {
@@ -56,7 +56,7 @@ test('Formatter calculateBarPositionInDay 4', () => {
   const end = moment('2019-03-10 15:30', momentFormat);
   const day = moment('2019-03-10');
   const result = calculateBarPositionInDay({start, end, day});
-  expect(result).toStrictEqual({ left: 42, width: 23 });
+  expect(result).toStrictEqual({ left: 41.666666666666664, width: 22.917824074074076 });
 })
 
 test('Formatter calculateBarPositionInDay 5', () => {
@@ -64,14 +64,14 @@ test('Formatter calculateBarPositionInDay 5', () => {
   const end = moment('2019-03-11 15:30', momentFormat);
   const day = moment('2019-03-10');
   const result = calculateBarPositionInDay({start, end, day});
-  expect(result).toStrictEqual({ left: 42, width: 58 });
+  expect(result).toStrictEqual({ left: 41.666666666666664, width: 58.333333333333336 });
 })
 
 test('Formatter calculateSpotPositionInDay 1', () => {
   const time = moment('2019-03-10 10:00', momentFormat);
   const day = moment('2019-03-10');
   const result = calculateSpotPositionInDay({time, day});
-  expect(result).toStrictEqual(42);
+  expect(result).toStrictEqual(41.666666666666664);
 })
 
 test('Formatter calculateSpotPositionInDay 2', () => {
@@ -85,7 +85,7 @@ test('Formatter calculateSpotPositionInDay 2', () => {
   const time = moment('2019-03-10 23:59:59', momentFormat);
   const day = moment('2019-03-10');
   const result = calculateSpotPositionInDay({time, day});
-  expect(result).toStrictEqual(100);
+  expect(result).toStrictEqual(99.93055555555556);
 });
 
 test('Formatter save', () => {

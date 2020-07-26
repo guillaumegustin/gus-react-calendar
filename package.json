@@ -1,6 +1,6 @@
 {
   "name": "gus-react-calendar",
-  "version": "1.2.1-beta",
+  "version": "1.2.2-beta",
   "description": "Calendar react component displaying spots and ranges bars",
   "main": "./dist/index.js",
   "author": "Guillaume Gustin <github@guillaumegustin>",
@@ -68,7 +68,7 @@
     "moment-range": "^4.0.2",
     "uniqid": "^5.2.0"
   },
-  "resolutions": {
+  "peerDependencies": {
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },

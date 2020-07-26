@@ -9,18 +9,15 @@ import './styles.scss';
 const HoursHeader = () => {
   return (
     <div className="header-row">
-      <CalendarCell size={1} withBorder={false} />
-      {getHoursInDay().map((h, i) => {
-        return (
-          <CalendarCell key={uniqid()} withBorder={false}>
-            {i % 2 === 0 && i > 0 && (
-              <div>
-                <div className="header-hour-label">{h.hour()}</div>
-              </div>
-            )}
-          </CalendarCell>
-        );
-      })}
+      <div className="header-row-content">
+        {getHoursInDay().map((h, i) => {
+          return (
+            <div className="header-hour">
+              <div className="header-hour-label">{i > 0 && i % 2 === 0 ? h.hour() : ''}</div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   );
 };
